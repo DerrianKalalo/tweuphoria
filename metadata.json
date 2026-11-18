@@ -1,0 +1,9 @@
+{
+  "name": "Tweuphoria Digital Attendance",
+  "description": "Sistem Absensi Digital Terverifikasi Kelas 12E SMA Unklab (Tweuphoria). Dilengkapi fitur Geofencing dan Verifikasi Wajah.",
+  "requestFramePermissions": [
+    "camera",
+    "geolocation"
+  ],
+  "majorCapabilities": []
+}

@@ -10,48 +10,47 @@ interface ScannerModalProps {
 
 export const ScannerModal: React.FC<ScannerModalProps> = ({ isOpen, onClose, onScan }) => {
   const scannerRef = useRef<Html5QrcodeScanner | null>(null);
+  const onScanRef = useRef(onScan);
+  onScanRef.current = onScan;
 
   useEffect(() => {
     if (isOpen) {
-      // Delay initialization slightly to ensure DOM is ready
       const timer = setTimeout(() => {
-        // Clear any existing instance first
         if (scannerRef.current) {
           scannerRef.current.clear().catch(console.error);
         }
 
         const scanner = new Html5QrcodeScanner(
           "reader",
-          { 
-            fps: 10, 
+          {
+            fps: 10,
             qrbox: { width: 250, height: 250 },
             aspectRatio: 1.0,
-            showTorchButtonIfSupported: true
+            showTorchButtonIfSupported: true,
           },
           false
         );
-        
+
         scannerRef.current = scanner;
 
         scanner.render(
           (decodedText) => {
-            onScan(decodedText);
+            onScanRef.current(decodedText);
           },
-          (errorMessage) => {
-            // parse errors, ignore
+          () => {
+            // ignore frame parse errors
           }
         );
       }, 100);
 
       return () => clearTimeout(timer);
     } else {
-      // Cleanup when closed
       if (scannerRef.current) {
         scannerRef.current.clear().catch(console.error);
         scannerRef.current = null;
       }
     }
-  }, [isOpen, onScan]);
+  }, [isOpen]);
 
   if (!isOpen) return null;
 

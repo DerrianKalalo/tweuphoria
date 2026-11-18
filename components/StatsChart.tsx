@@ -26,19 +26,21 @@ export const StatsChart: React.FC<StatsChartProps> = ({ students, database }) =>
   ];
 
   return (
-    <div className="h-64 w-full mt-6 bg-white p-6 rounded-3xl border border-gray-200 shadow-sm">
-      <h3 className="text-lg font-bold text-gray-700 mb-6">Ringkasan Statistik Kelas</h3>
-      <ResponsiveContainer width="100%" height="100%">
-        <BarChart data={data}>
-          <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#f1f5f9" />
-          <XAxis dataKey="name" tick={{ fill: '#64748b', fontSize: 12, fontWeight: 700 }} axisLine={false} tickLine={false} />
-          <YAxis hide />
-          <Tooltip cursor={{ fill: '#f8fafc' }} contentStyle={{ borderRadius: '16px', border: 'none', boxShadow: '0 10px 15px -3px rgb(0 0 0 / 0.1)' }} />
-          <Bar dataKey="value" radius={[8, 8, 8, 8]} barSize={40}>
-            {data.map((entry, index) => (<Cell key={`cell-${index}`} fill={entry.color} />))}
-          </Bar>
-        </BarChart>
-      </ResponsiveContainer>
+    <div className="w-full bg-white p-6 rounded-2xl border border-slate-200">
+      <h3 className="text-base font-bold text-slate-900 mb-4">Ringkasan Statistik Kelas</h3>
+      <div className="h-64 w-full">
+        <ResponsiveContainer width="100%" height="100%">
+          <BarChart data={data}>
+            <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#f1f5f9" />
+            <XAxis dataKey="name" tick={{ fill: '#64748b', fontSize: 12, fontWeight: 600 }} axisLine={false} tickLine={false} />
+            <YAxis hide />
+            <Tooltip cursor={{ fill: '#f8fafc' }} contentStyle={{ borderRadius: '12px', border: '1px solid #e2e8f0', boxShadow: '0 4px 12px rgb(0 0 0 / 0.08)' }} />
+            <Bar dataKey="value" radius={[8, 8, 8, 8]} barSize={44}>
+              {data.map((entry, index) => (<Cell key={`cell-${index}`} fill={entry.color} />))}
+            </Bar>
+          </BarChart>
+        </ResponsiveContainer>
+      </div>
     </div>
   );
 };

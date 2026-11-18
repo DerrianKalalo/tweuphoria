@@ -1,5 +1,21 @@
 export type AttendanceStatus = 'H' | 'I' | 'S' | 'A';
 
+export type UserRole = 'admin' | 'student';
+
+export interface AuthSession {
+  role: UserRole;
+  identifier: string; // 'admin' or student email
+  name: string;
+  studentId?: string;
+}
+
+export type StudentPasswordsMap = Record<string, string>;
+
+export const STUDENT_EMAIL_DOMAIN = 'student.uhs.sch.id';
+export const DEFAULT_STUDENT_PASSWORD = 'uhs12e!';
+export const ADMIN_USERNAME = 'admin';
+export const ADMIN_PASSWORD = 'uhsadmin!';
+
 export interface Student {
   id: string;
   name: string;
